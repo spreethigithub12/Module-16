@@ -3,7 +3,6 @@
 ## AIM:
 To write a Python function `def leftRotate(self, z):` to perform the left rotation operation in an AVL Tree and insert the element '7' into it.
 
----
 
 ## ALGORITHM:
 
@@ -35,16 +34,112 @@ To write a Python function `def leftRotate(self, z):` to perform the left rotati
 
 ### Step 8: End the program.
 
----
-
 ## PYTHON PROGRAM
 
 ```
-ENTER YOUR CODE
+#Reg.No: 212222060182
+#Name: Preethika S
+
+class TreeNode(object):
+	def __init__(self, val):
+		self.val = val
+		self.left = None
+		self.right = None
+		self.height = 1
+
+class AVL_Tree(object):
+
+
+	def insert(self, root, key):
+	
+	
+		if not root:
+			return TreeNode(key)
+		elif key < root.val:
+			root.left = self.insert(root.left, key)
+		else:
+			root.right = self.insert(root.right, key)
+
+	
+		root.height = 1 + max(self.getHeight(root.left),
+						self.getHeight(root.right))
+
+	
+		balance = self.getBalance(root)
+
+	
+		if balance > 1 and key < root.left.val:
+			return self.rightRotate(root)
+
+		if balance < -1 and key > root.right.val:
+			return self.leftRotate(root)
+
+		if balance > 1 and key > root.left.val:
+			root.left = self.leftRotate(root.left)
+			return self.rightRotate(root)
+
+		if balance < -1 and key < root.right.val:
+			root.right = self.rightRotate(root.right)
+			return self.leftRotate(root)
+
+		return root
+
+
+
+	def rightRotate(self, z):
+	    y=z.left
+	    t1=y.right
+	    y.right=z
+	    z.left=t1
+	    z.height=1+max(self.getHeight(z.left),self.getHeight(z.right))
+	    y.height=1+max(self.getHeight(y.left),self.getHeight(y.right))
+	    return y
+
+	def getHeight(self, root):
+		if not root:
+			return 0
+
+		return root.height
+
+	def getBalance(self, root):
+		if not root:
+			return 0
+
+		return self.getHeight(root.left) - self.getHeight(root.right)
+
+	def preOrder(self, root):
+
+		if not root:
+			return
+
+		print("{0} ".format(root.val), end="")
+		self.preOrder(root.left)
+		self.preOrder(root.right)
+
+
+myTree = AVL_Tree()
+root = None
+
+
+root = myTree.insert(root, 33)
+root = myTree.insert(root, 13)
+root = myTree.insert(root, 53)
+root = myTree.insert(root, 11)
+root = myTree.insert(root, 21)
+root = myTree.insert(root, 61)
+root = myTree.insert(root, 9)
+root = myTree.insert(root, 7)
+
+
+print("Preorder traversal of the",
+	"constructed AVL tree is")
+myTree.preOrder(root)
+print()
 ```
 
 ## OUTPUT
-```
-```
+<img width="645" height="227" alt="image" src="https://github.com/user-attachments/assets/34ab4306-aee2-429a-8001-8542ed7c5b10" />
+<img width="638" height="216" alt="image" src="https://github.com/user-attachments/assets/d9fa32a7-bad8-4a29-8e32-043783c46421" />
 
 ## RESULT
+Thus, the Python function def leftRotate(self, z): for performing the left rotation operation in an AVL Tree and insert the element '7' into it is executed successfully.
